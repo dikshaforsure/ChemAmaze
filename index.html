@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChemAmaze Bilingual Hub</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #4a154b;
+            --secondary-color: #007a5a;
+            --accent-color: #ecb22e;
+            --bg-color: #f4f5f6;
+            --text-color: #1d1c1d;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-top: 20px;
+            position: relative;
+            min-height: 460px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Language Toggle Bar */
+        .lang-bar {
+            display: flex;
+            justify-content: flex-end;
+            gap: 5px;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .lang-toggle-btn {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .lang-toggle-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Navigation Bar */
+        .nav-bar {
+            display: none;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .nav-btn {
+            background-color: #e0e0e0;
+            color: var(--text-color);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .nav-btn:hover { background-color: #d0d0d0; }
+
+        /* Typography */
+        h1 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .screen.active { display: flex; }
+
+        .enter-link {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            box-shadow: 0 4px 12px rgba(0, 122, 90, 0.3);
+            transition: all 0.2s;
+        }
+
+        .enter-link:hover {
+            background-color: #005a42;
+            transform: translateY(-2px);
+        }
+
+        .list-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .item-link {
+            display: block;
+            background-color: #f8f9fa;
+            border: 2px solid #e2e8f0;
+            padding: 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .item-link:hover {
+            background-color: #f0f4f8;
+            border-color: var(--primary-color);
+            transform: translateX(4px);
+        }
+
+        .game-link { border-left: 5px solid var(--accent-color); }
+        
+        .chapter-title {
+            font-size: 0.85rem;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 10px; }
+            .app-container { padding: 20px; margin-top: 10px; }
+            h1 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <!-- Language Toggler Panel -->
+        <div class="lang-bar">
+            <button id="lang-en" class="lang-toggle-btn active" onclick="setLanguage('en')">English</button>
+            <button id="lang-ta" class="lang-toggle-btn" onclick="setLanguage('ta')">தமிழ்</button>
+        </div>
+        
+        <!-- Navigation Bar -->
+        <div id="navigation-bar" class="nav-bar">
+            <button id="btn-back" class="nav-btn" onclick="goBack()">← Back</button>
+            <button id="btn-main" class="nav-btn" onclick="goMain()">🏠 Main Page</button>
+        </div>
+
+        <!-- SCREEN 1: HOME PAGE -->
+        <div id="screen-home" class="screen active">
+            <h1 id="txt-app-title">ChemAmaze - TamilNadu State Board Syllabus Games</h1>
+            <a href="#" id="txt-enter-btn" class="enter-link" onclick="navigateTo('subjects')">Click here to enter</a>
+        </div>
+
+        <!-- SCREEN 2: SUBJECT SELECTION -->
+        <div id="screen-subjects" class="screen">
+            <h2 id="txt-select-subject">Select Subject</h2>
+            <div class="list-container">
+                <a href="#" class="item-link" onclick="selectSubject('Mathematics')">
+                    <span class="lang-show en-inline">Mathematics</span>
+                    <span class="lang-show ta-inline">கணிதம்</span>
+                </a>
+                <a href="#" class="item-link" onclick="selectSubject('Science')">
+                    <span class="lang-show en-inline">Science</span>
+                    <span class="lang-show ta-inline">அறிவியல்</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- SCREEN 3: GRADE SELECTION -->
+        <div id="screen-grades" class="screen">
+            <h2 id="grade-screen-title">Select Class</h2>
+            <div class="list-container">
+                <a href="#" class="item-link" onclick="loadGames(4)"><span class="txt-class-prefix">Class</span> 4</a>
+                <a href="#" class="item-link" onclick="loadGames(5)"><span class="txt-class-prefix">Class</span> 5</a>
+                <a href="#" class="item-link" onclick="loadGames(6)"><span class="txt-class-prefix">Class</span> 6</a>
+                <a href="#" class="item-link" onclick="loadGames(7)"><span class="txt-class-prefix">Class</span> 7</a>
+                <a href="#" class="item-link" onclick="loadGames(8)"><span class="txt-class-prefix">Class</span> 8</a>
+            </div>
+        </div>
+
+        <!-- SCREEN 4: TOPICS & GAME LINKS -->
+        <div id="screen-games" class="screen">
+            <h2 id="selected-class-title">Games List</h2>
+            <div id="games-list-container" class="list-container">
+                <!-- Dynamic Links Generated Here -->
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const uiTranslations = {
+            en: {
+                appTitle: "ChemAmaze - TamilNadu State Board Syllabus Games",
+                enterBtn: "Click here to enter",
+                selectSubject: "Select Subject",
+                selectClass: "Select Class",
+                classPrefix: "Class",
+                backBtn: "← Back",
+                mainBtn: "🏠 Main Page",
+                mathName: "Mathematics",
+                sciName: "Science",
+                comingSoon: "Coming Soon! No games added yet."
+            },
+            ta: {
+                appTitle: "செம்அமேஸ் - தமிழ்நாடு மாநிலப் பாடத்திட்ட விளையாட்டுகள்",
+                enterBtn: "உள்ளே நுழைய இங்கே கிளிக் செய்யவும்",
+                selectSubject: "பாடத்தைத் தேர்ந்தெடுக்கவும்",
+                selectClass: "வகுப்பைத் தேர்ந்தெடுக்கவும்",
+                classPrefix: "வகுப்பு",
+                backBtn: "← பின்னே",
+                mainBtn: "🏠 முதன்மைப் பக்கம்",
+                mathName: "கணிதம்",
+                sciName: "அறிவியல்",
+                comingSoon: "விரைவில் வரும்! விளையாட்டுகள் இன்னும் சேர்க்கப்படவில்லை."
+            }
+        };
+
+        // --- FULLY POPULATED DATA MAPPED FROM YOUR INPUT URLS ---
+        const gamesRepository = {
+            "Science": {
+                4: [
+                    { chapter: {en:"Chapter 1", ta:"அத்தியாயம் 1"}, topic: {en:"My Body - Internal Organs Quiz", ta:"எனது உடல் - உள் உறுப்புகள் மற்றும் செரிமான மண்டலம்"}, url: {en:"https://wordwall.net/resource/114002027", ta:"https://wordwall.net/resource/114153729"} },
+                    { chapter: {en:"Chapter 2", ta:"அத்தியாயம் 2"}, topic: {en:"Matter and Materials - Fibers", ta:"பருப்பொருள்கள் மற்றும் மூலப்பொருள்கள் - இயற்கை & செயற்கை இழைகள்"}, url: {en:"https://wordwall.net/resource/114074622", ta:"https://wordwall.net/resource/114154213"} },
+                    { chapter: {en:"Chapter 3", ta:"அத்தியாயம் 3"}, topic: {en:"Work and Energy - Science Definition Quiz", ta:"வேலை மற்றும் ஆற்றல் - அறிவியல் ரீதியான வேலை & ஆற்றல் வடிவங்கள்"}, url: {en:"https://wordwall.net/resource/114075531", ta:"https://wordwall.net/resource/114180604"} }
+                ],
+                5: [
+                    { chapter: {en:"Chapter 1", ta:"அத்தியாயம் 1"}, topic: {en:"Organ Systems - Excretory & Nervous Systems", ta:"உறுப்பு மண்டலங்கள் - சுற்றோட்ட, கழிவுநீக்க & நரம்பு மண்டலம்"}, url: {en:"https://wordwall.net/resource/114077594", ta:"https://wordwall.net/resource/114180216"} },
+                    { chapter: {en:"Chapter 2", ta:"அத்தியாயம் 2"}, topic: {en:"Matter and Materials - States of Water", ta:"பருப்பொருள்கள் மற்றும் மூலப்பொருள்கள் - திண்மம், திரவம் & வாயு நிலைகள்"}, url: {en:"https://wordwall.net/resource/114094250", ta:"https://wordwall.net/resource/114180005"} },
+                    { chapter: {en:"Chapter 3", ta:"அத்தியாயம் 3"}, topic: {en:"Energy - Conservation & Forms", ta:"ஆற்றல் - இயந்திர, வெப்ப, வேதி மற்றும் ஒளி ஆற்றல் வகைகள்"}, url: {en:"https://wordwall.net/resource/114094662", ta:"https://wordwall.net/resource/114179783"} }
+                ],
+                6: [
+                    { chapter: {en:"Chapter 1", ta:"அத்தியாயம் 1"}, topic: {en:"Measurements - Standard SI Units", ta:"அளவீடுகள் - பன்னாட்டு அலகு முறை (SI) & நீளம், நிறை கணக்கீடுகள்"}, url: {en:"https://wordwall.net/resource/114095318", ta:"https://wordwall.net/resource/114179594"} },
+                    { chapter: {en:"Chapter 2", ta:"அத்தியாயம் 2"}, topic: {en:"Force and Motion - Matrix & Cycles", ta:"விசையும் இயக்கமும் - நேர்க்கோட்டு, வட்ட மற்றும் கால ஒழுங்கு இயக்கம்"}, url: {en:"https://wordwall.net/resource/114123712", ta:"https://wordwall.net/resource/114179120"} },
+                    { chapter: {en:"Chapter 3", ta:"அத்தியாயம் 3"}, topic: {en:"Matter Around Us - Mixtures", ta:"நம்மைச் சுற்றியுள்ள பருப்பொருள்கள் - கலவைகள் & பிரித்தெடுத்தல் முறைகள்"}, url: {en:"https://wordwall.net/resource/114096116", ta:"https://wordwall.net/resource/114178697"} }
+                ],
+                7: [
+                    { chapter: {en:"Chapter 1", ta:"அத்தியாயம் 1"}, topic: {en:"Measurement - Derived Quantities", ta:"அளவீட்டியல் - வழி அலகுகள், ஒழுங்கான மற்றும் ஒழுங்கற்ற வடிவங்கள்"}, url: {en:"https://wordwall.net/resource/114124202", ta:"https://wordwall.net/resource/114154646"} },
+                    { chapter: {en:"Chapter 2", ta:"அத்தியாயம் 2"}, topic: {en:"Force and Motion - Speed & Velocity", ta:"விசையும் இயக்கமும் - தொலைவு, இடப்பெயர்ச்சி, வேகம் & திசைவேகம்"}, url: {en:"https://wordwall.net/resource/114124597", ta:"https://wordwall.net/resource/114154939"} },
+                    { chapter: {en:"Chapter 3", ta:"அத்தியாயம் 3"}, topic: {en:"Matter Around Us - Elements & Compounds", ta:"நம்மைச் சுற்றியுள்ள பருப்பொருள்கள் - அணுக்கள், மூலக்கூறுகள் & சேர்மங்கள்"}, url: {en:"https://wordwall.net/resource/114125590", ta:"https://wordwall.net/resource/114155148"} }
+                ],
+                8: [
+                    { chapter: {en:"Chapter 1", ta:"அத்தியாயம் 1"}, topic: {en:"Measurement - Fundamental Units", ta:"அளவீட்டியல் - அடிப்படை அலகுகள், வெப்பநிலை & ஒளிரும் செறிவு"}, url: {en:"https://wordwall.net/resource/114127863", ta:"https://wordwall.net/resource/114155526"} },
+                    { chapter: {en:"Chapter 2", ta:"அத்தியாயம் 2"}, topic: {en:"Forces and Pressure - Liquid Mechanics", ta:"விசையும் அழுத்தமும் - திரவ அழுத்தம், வளிமண்டல அழுத்தம் & உராய்வு"}, url: {en:"https://wordwall.net/resource/114128944", ta:"https://wordwall.net/resource/114178016"} },
+                    { chapter: {en:"Chapter 3", ta:"அத்தியாயம் 3"}, topic: {en:"Light - Mirrors & Focal Length Anatomy", ta:"ஒளி - கோள ஆடிகள், ஒளிவிலகல், விம்பங்கள் மற்றும் கண் அமைப்பு"}, url: {en:"https://wordwall.net/resource/114129247", ta:"https://wordwall.net/resource/114178280"} }
+                ]
+            },
+            "Mathematics": {
+                4: [
+                    { chapter: {en:"Chapter 1", ta:"அத்தியாயம் 1"}, topic: {en:"Geometry - Shapes & Diagonals", ta:"வடிவியல் - வடிவங்கள், முனைகள் & மூலைவிட்டங்கள்"}, url: {en:"https://wordwall.net/resource/114345602", ta:"https://wordwall.net/resource/114345752"} },
+                    { chapter: {en:"Chapter 2", ta:"அத்தியாயம் 2"}, topic: {en:"Numbers - Place Value Quiz", ta:"எண்கள் - இடமதிப்பு வினாடி வினா"}, url: {en:"https://wordwall.net/resource/114347499", ta:"https://wordwall.net/resource/114347675"} },
+                    { chapter: {en:"Chapter 3", ta:"அத்தியாயம் 3"}, topic: {en:"Patterns - Complete the Sequence", ta:"அமைப்புகள் - தொடரை நிறைவு செய்க"}, url: {en:"https://wordwall.net/resource/114345935", ta:"https://wordwall.net/resource/114346029"} }
+                ],
+                5: [
+                    { chapter: {en:"Chapter 1", ta:"அத்தியாயம் 1"}, topic: {en:"Geometry - 3D Nets & Symmetry Whack-a-Mole", ta:"வடிவியல் - முப்பரிமாண வடிவங்கள் & சமச்சீர் பண்பு"}, url: {en:"https://wordwall.net/resource/114344633", ta:"https://wordwall.net/resource/114344707"} },
+                    { chapter: {en:"Chapter 2", ta:"அத்தியாயம் 2"}, topic: {en:"Numbers - Value Combinations", ta:"எண்கள் - இடமதிப்பு & கணிதச் செயல்பாடுகள்"}, url: {en:"https://wordwall.net/resource/114344855", ta:"https://wordwall.net/resource/114344960"} },
+                    { chapter: {en:"Chapter 3", ta:"அத்தியாயம் 3"}, topic: {en:"Patterns - Square Numbers & Sequences", ta:"அமைப்புகள் - வர்க்க எண்கள் மற்றும் எண்களின் வரிசை"}, url: {en:"https://wordwall.net/resource/114345143", ta:"https://wordwall.net/resource/114345387"} }
+                ],
+                6: [
+                    { chapter: {en:"Chapter 1", ta:"அத்தியாயம் 1"}, topic: {en:"Numbers - BIDMAS, HCF & Primes", ta:"எண்கள் - செயல்பாடுகளின் வரிசை, மீ.பெ.கா & பகா எண்கள்"}, url: {en:"https://wordwall.net/resource/114311947", ta:"https://wordwall.net/resource/114312073"} },
+                    { chapter: {en:"Chapter 2", ta:"அத்தியாயம் 2"}, topic: {en:"Introduction to Algebra - Finding Variables", ta:"இயற்கணிதம் ஓர் அறிமுகம் - மாறிகள் மற்றும் வாய்மொழிக் கூற்றுகள்"}, url: {en:"https://wordwall.net/resource/114312343", ta:"https://wordwall.net/resource/114312589"} },
+                    { chapter: {en:"Chapter 3", ta:"அத்தியாயம் 3"}, topic: {en:"Ratio and Proportion - Simplify & Balance", ta:"விகிதம் மற்றும் விகிதச்சமநிலை - எளிய வடிவம் & சமான விகிதம்"}, url: {en:"https://wordwall.net/resource/114312835", ta:"https://wordwall.net/resource/114313041"} }
+                ],
+                7: [
+                    { chapter: {en:"Chapter 1", ta:"அத்தியாயம் 1"}, topic: {en:"Number System - Integers Calculation Matrix", ta:"எண்ணியல் - முழுக்களின் கூட்டல், கழித்தல் & பெருக்கல் விதிகள்"}, url: {en:"https://wordwall.net/resource/114310059", ta:"https://wordwall.net/resource/114310436"} },
+                    { chapter: {en:"Chapter 2", ta:"அத்தியாயம் 2"}, topic: {en:"Measurements - Geometry Planes", ta:"அளவைகள் - இணைகரம், சாய்சதுரம் & சரிவகத்தின் பரப்பளவு"}, url: {en:"https://wordwall.net/resource/114310790", ta:"https://wordwall.net/resource/114311024"} },
+                    { chapter: {en:"Chapter 3", ta:"அத்தியாயம் 3"}, topic: {en:"Algebra - Terms & Equations Solver", ta:"இயற்கணிதம் - ஒத்த உறுப்புகள், எண்கெழுக்கள் & மாறிலிகள்"}, url: {en:"https://wordwall.net/resource/114311294", ta:"https://wordwall.net/resource/114311573"} }
+                ],
+                8: [
+                    { chapter: {en:"Chapter 1", ta:"அத்தியாயம் 1"}, topic: {en:"Rational Numbers - Identities & Inverses", ta:"விகிதமுறு எண்கள் - கூட்டல்/பெருக்கல் சமனி & நேர்மாறு பண்புகள்"}, url: {en:"https://wordwall.net/resource/114307487", ta:"https://wordwall.net/resource/114308100"} },
+                    { chapter: {en:"Chapter 2", ta:"அத்தியாயம் 2"}, topic: {en:"Measurements - Sector Area & Arc Matchup", ta:"அளவைகள் - வட்டவில்லின் நீளம் & வட்டக்கோணப் பகுதி பரப்பளவு"}, url: {en:"https://wordwall.net/resource/114303893", ta:"https://wordwall.net/resource/114305487"} },
+                    { chapter: {en:"Chapter 3", ta:"அத்தியாயம் 3"}, topic: {en:"Algebra - Polynomial Degrees & Equations", ta:"இயற்கணிதம் - கோவைகளின் படி & இயற்கணித முற்றொருமைகள்"}, url: {en:"https://wordwall.net/resource/114306245", ta:"https://wordwall.net/resource/114306706"} }
+                ]
+            }
+        };
+
+        let currentScreen = 'home';
+        let currentLang = 'en';
+        let selectedSubject = null;
+        let selectedClass = null;
+
+        function setLanguage(langCode) {
+            currentLang = langCode;
+            
+            document.querySelectorAll('.lang-toggle-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(`lang-${langCode}`).classList.add('active');
+            
+            if(langCode === 'ta') {
+                document.querySelectorAll('.en-inline').forEach(e => e.style.display = 'none');
+                document.querySelectorAll('.ta-inline').forEach(e => e.style.display = 'inline');
+            } else {
+                document.querySelectorAll('.en-inline').forEach(e => e.style.display = 'inline');
+                document.querySelectorAll('.ta-inline').forEach(e => e.style.display = 'none');
+            }
+
+            const dict = uiTranslations[langCode];
+            document.getElementById('txt-app-title').innerText = dict.appTitle;
+            document.getElementById('txt-enter-btn').innerText = dict.enterBtn;
+            document.getElementById('txt-select-subject').innerText = dict.selectSubject;
+            document.getElementById('btn-back').innerText = dict.backBtn;
+            document.getElementById('btn-main').innerText = dict.mainBtn;
+            
+            document.querySelectorAll('.txt-class-prefix').forEach(span => {
+                span.innerText = dict.classPrefix;
+            });
+
+            if (selectedSubject) {
+                const subjectLabel = selectedSubject === 'Mathematics' ? dict.mathName : dict.sciName;
+                document.getElementById('grade-screen-title').innerText = `${subjectLabel} - ${dict.selectClass}`;
+            }
+            if (selectedClass) {
+                loadGames(selectedClass); 
+            }
+        }
+
+        function navigateTo(screenName) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(`screen-${screenName}`).classList.add('active');
+            
+            const navBar = document.getElementById('navigation-bar');
+            navBar.style.display = (screenName === 'home') ? 'none' : 'flex';
+            currentScreen = screenName;
+        }
+
+        function selectSubject(subjectName) {
+            selectedSubject = subjectName;
+            const dict = uiTranslations[currentLang];
+            const subjectLabel = subjectName === 'Mathematics' ? dict.mathName : dict.sciName;
+            
+            document.getElementById('grade-screen-title').innerText = `${subjectLabel} - ${dict.selectClass}`;
+            selectedClass = null; 
+            navigateTo('grades');
+        }
+
+        function loadGames(classId) {
+            selectedClass = classId;
+            const container = document.getElementById('games-list-container');
+            const title = document.getElementById('selected-class-title');
+            const dict = uiTranslations[currentLang];
+            
+            const subjectLabel = selectedSubject === 'Mathematics' ? dict.mathName : dict.sciName;
+            title.innerText = `${subjectLabel} : ${dict.classPrefix} ${classId}`;
+            container.innerHTML = ''; 
+
+            const games = gamesRepository[selectedSubject]?.[classId] || [];
+
+            if(games.length > 0) {
+                games.forEach(game => {
+                    const linkElement = document.createElement('a');
+                    linkElement.href = game.url[currentLang]; // Pulls target URL matching active local state
+                    linkElement.target = "_blank";
+                    linkElement.className = "item-link game-link";
+                    
+                    const displayChapter = game.chapter[currentLang];
+                    const displayTopic = game.topic[currentLang];
+                    
+                    linkElement.innerHTML = `
+                        <div class="chapter-title">${displayChapter}</div>
+                        <div>${displayTopic}</div>
+                    `;
+                    container.appendChild(linkElement);
+                });
+            } else {
+                container.innerHTML = `<p style="color: #666; padding: 20px;">${dict.comingSoon}</p>`;
+            }
+
+            navigateTo('games');
+        }
+
+        function goBack() {
+            if (currentScreen === 'games') {
+                selectedClass = null; 
+                navigateTo('grades');
+            } else if (currentScreen === 'grades') {
+                selectedSubject = null;
+                navigateTo('subjects');
+            } else if (currentScreen === 'subjects') {
+                navigateTo('home');
+            }
+        }
+
+        function goMain() {
+            selectedSubject = null;
+            selectedClass = null;
+            navigateTo('home');
+        }
+
+        setLanguage('en');
+    </script>
+</body>
+</html>
