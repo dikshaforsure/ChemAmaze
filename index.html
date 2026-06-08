@@ -15,76 +15,94 @@
             font-family: 'Roboto', sans-serif;
         }
         h1 {
-    font-weight: 700;
-    }
+            font-weight: 700;
+        }
 
-h2 {
-    font-weight: 600;
-}
+        h2 {
+            font-weight: 600;
+        }
 
-.item-link {
-    font-weight: 500;
-}
+        .item-link {
+            font-weight: 500;
+        }
 
-.enter-link {
-    font-weight: 700;
-}
+        .enter-link {
+            font-weight: 700;
+        }
+        
         :root {
             --primary-color: #4a154b;
             --secondary-color: #007a5a;
             --accent-color: #ecb22e;
             --bg-color: #f4f5f6;
             --text-color: #1d1c1d;
+            --blue-theme: #21A0D2;
         }
-        #screen-home {
-    background-color: #21A0D2; 
-    color: white;             
-    width: 100%;
-    padding: 30px;
-    border-radius: 12px;       
-}
 
-#screen-home .enter-link {
-    background-color: #ffffff;
-    color: #21A0D2;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-#screen-home .enter-link:hover {
-    background-color: #f0f0f0;
-}
+        /* --- BODY STYLES --- */
         body {
-            background-color: var(--bg-color);
+            background-color: var(--blue-theme);
             color: var(--text-color);
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 15px;
+            transition: background-color 0.3s ease;
         }
 
+        body.theme-home {
+            background-color: var(--blue-theme);
+        }
+        body.theme-inner {
+            background-color: var(--bg-color);
+        }
+
+        /* --- CONTAINER STYLES --- */
         .app-container {
             width: 100%;
             max-width: 600px;
             background: white;
-            padding: 30px;
+            padding: 25px 20px;
             border-radius: 16px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.1);
             text-align: center;
-            margin-top: 20px;
+            margin-top: 10px;
             position: relative;
             min-height: 460px;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            transition: all 0.3s ease;
         }
 
-        /* Language Toggle Bar */
+        .app-container.home-active {
+            background: transparent;
+            box-shadow: none;
+        }
+
+        /* --- FIXED ONE-LINE TOP BAR ALIGNMENT --- */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; 
+            width: 100%;
+            margin-bottom: 25px;
+            padding: 0 4px;
+        }
+
+        .top-logo {
+            width: 110px;
+            height: auto;
+            object-fit: contain;
+            margin-left: -8px;
+        }
+
         .lang-bar {
             display: flex;
-            justify-content: flex-end;
-            gap: 5px;
-            width: 100%;
-            margin-bottom: 15px;
+            gap: 6px;
+            align-items: center;
+            flex-shrink: 0;
         }
 
         .lang-toggle-btn {
@@ -95,21 +113,60 @@ h2 {
             cursor: pointer;
             font-size: 0.85rem;
             font-weight: 600;
+            white-space: nowrap;
             transition: all 0.2s;
         }
 
         .lang-toggle-btn.active {
-        background-color: #21A0D2;
-        color: white;
-        border-color: #21A0D2;
+            background-color: #21A0D2;
+            color: white;
+            border-color: #21A0D2;
         }
 
-        /* Navigation Bar */
+        .home-active .lang-toggle-btn {
+            border-color: rgba(255, 255, 255, 0.4);
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        .home-active .lang-toggle-btn.active {
+            background-color: #ffffff;
+            color: #21A0D2;
+            border-color: #ffffff;
+        }
+
+        /* --- REMODELLED HOME SCREEN STYLES --- */
+        #screen-home {
+            width: 100%;
+            padding: 10px;
+            gap: 25px;
+            pointer-events: auto;
+        }
+
+        #screen-home h1 {
+            color: white;
+            font-size: 1.6rem;
+            line-height: 1.4;
+        }
+
+        #screen-home .enter-link {
+            background-color: #ffffff;
+            color: #21A0D2;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            margin-top: 0;
+        }
+
+        #screen-home .enter-link:hover {
+            background-color: #f0f4f8;
+            transform: translateY(-2px);
+        }
+
+        /* --- NAVIGATION BAR --- */
         .nav-bar {
             display: none;
             justify-content: space-between;
             margin-bottom: 20px;
             width: 100%;
+            gap: 10px;
         }
 
         .nav-btn {
@@ -126,10 +183,10 @@ h2 {
 
         .nav-btn:hover { background-color: #d0d0d0; }
 
-        /* Typography */
+        /* --- TYPOGRAPHY AND LAYOUT ADJUSTMENTS --- */
         h1 {
             color: var(--primary-color);
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             margin-bottom: 20px;
             line-height: 1.4;
         }
@@ -137,7 +194,8 @@ h2 {
         h2 {
             color: var(--secondary-color);
             margin-bottom: 20px;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
+            line-height: 1.4;
         }
 
         .screen {
@@ -148,9 +206,9 @@ h2 {
         }
 
         .screen.active {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .enter-link {
@@ -184,14 +242,16 @@ h2 {
             display: block;
             background-color: #f8f9fa;
             border: 2px solid #e2e8f0;
-            padding: 16px;
+            padding: 14px 16px;
             border-radius: 10px;
             text-decoration: none;
             color: var(--primary-color);
             font-weight: 600;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
+            line-height: 1.5;
             transition: all 0.2s;
             text-align: left;
+            word-wrap: break-word;
         }
 
         .item-link:hover {
@@ -202,111 +262,106 @@ h2 {
 
         .game-link { border-left: 5px solid var(--accent-color); }
         
+        .game-link iframe {
+            width: 100%;
+            max-width: 100%;
+            min-height: 450px;
+            border-radius: 10px;
+        }
+
+        #game-player-container iframe {
+        width: 100%;
+        height: 75vh;
+        min-height: 600px;
+        border: none;
+        border-radius: 12px;
+        }
+
+        #screen-player {
+        width: 100%;
+        }
         .chapter-title {
             font-size: 0.85rem;
             color: #666;
             text-transform: uppercase;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
             font-weight: bold;
+            line-height: 1.2;
         }
 
+        /* --- CSR FOOTER IN BOTTOM REGION --- */
+        .csr-footer {
+            margin-top: auto;      /* Pushes the footer safely to the bottom of the flex container */
+            padding-top: 30px;     /* Keeps a healthy distance from the links/buttons above */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            text-align: right;
+            width: 100%;
+            gap: 2px;
+        }
+
+        .csr-text {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* When home screen is active, turns the text white to stand out over the full blue layout */
+        .home-active .csr-text {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .csr-logo {
+            width: 120px;          /* Clean, explicit size constraint for mobile/web views */
+            height: auto;
+            object-fit: contain;
+            margin-top: 0;
+        }
+
+        /* --- CLEAN MOBILE OPTIMIZATION OVERRIDES --- */
         @media (max-width: 480px) {
             body { padding: 10px; }
-            .app-container { padding: 20px; margin-top: 10px; }
-            h1 { font-size: 1.4rem; }
+            .app-container { padding: 20px 15px; margin-top: 5px; }
+            h1 { font-size: 1.35rem; }
+            h2 { font-size: 1.15rem; }
+            .item-link { font-size: 0.95rem; padding: 12px 14px; }
+            .top-logo { width: 100px; }
+            .lang-toggle-btn { padding: 5px 10px; font-size: 0.8rem; }
+            .csr-footer { padding-top: 20px; }
+            .csr-logo { width: 100px; }
         }
-       
-#screen-home {
-    background-color: #21A0D2;
-    width: 100%;
-    padding: 20px;
-    border-radius: 12px;
-    gap: 25px;
-}
-
-#screen-home .enter-link {
-    background-color: #ffffff;
-    color: #21A0D2;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    margin-top: 0;          /* Reset margin since flex gap handles it */
-}
-#screen-home h1{
-    color:white;
-}
-#screen-home .enter-link:hover {
-    background-color: #f0f4f8;
-    transform: translateY(-2px);
-}
-
-.top-bar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    width:100%;
-    margin-bottom:20px;
-}
-
-.top-logo{
-    width:120px;
-    height:auto;
-    object-fit:contain;
-}
-
-.lang-bar{
-    display:flex;
-    gap:5px;
-}
     </style>
 </head>
-<body>
+<body class="theme-home">
 
-    <div class="app-container">
+    <div id="app-container-wrapper" class="app-container home-active">
         
-        <!-- Language Toggler Panel -->
         <div class="top-bar">
-    <img src="logo.jpeg"
-         class="top-logo"
-         alt="ChemAmaze Logo">
+            <img src="logo.jpeg" class="top-logo" alt="ChemAmaze Logo">
 
-    <div class="lang-bar">
-        <button id="lang-en"
-                class="lang-toggle-btn active"
-                onclick="setLanguage('en')">
-            English
-        </button>
+            <div class="lang-bar">
+                <button id="lang-en" class="lang-toggle-btn active" onclick="setLanguage('en')">English</button>
+                <button id="lang-ta" class="lang-toggle-btn" onclick="setLanguage('ta')">தமிழ்</button>
+            </div>
+        </div>
 
-        <button id="lang-ta"
-                class="lang-toggle-btn"
-                onclick="setLanguage('ta')">
-            தமிழ்
-        </button>
-    </div>
-
-</div>
-        <!-- Navigation Bar -->
         <div id="navigation-bar" class="nav-bar">
             <button id="btn-back" class="nav-btn" onclick="goBack()">← Back</button>
             <button id="btn-main" class="nav-btn" onclick="goMain()">🏠 Main Page</button>
         </div>
 
-       
-         <!-- SCREEN 1: HOME PAGE -->
-<div id="screen-home" class="screen active">
+        <div id="screen-home" class="screen active">
+            <h1 id="txt-app-title">ChemAmaze - TamilNadu State Board Syllabus Games</h1>
+            <a href="#" id="txt-enter-btn" class="enter-link" onclick="navigateTo('subjects')">Click here to enter</a>
+            <div class="csr-footer">
+            <div class="csr-text">A CSR initiative of</div>
+            <img src="d-basf.png" class="csr-logo" alt="BASF Logo">
+        </div>
+        </div>
 
-    <h1 id="txt-app-title">
-        ChemAmaze - TamilNadu State Board Syllabus Games
-    </h1>
-
-    <a href="#"
-       id="txt-enter-btn"
-       class="enter-link"
-       onclick="navigateTo('subjects')">
-       Click here to enter
-    </a>
-
-</div>
-
-        <!-- SCREEN 2: SUBJECT SELECTION -->
         <div id="screen-subjects" class="screen">
             <h2 id="txt-select-subject">Select Subject</h2>
             <div class="list-container">
@@ -321,7 +376,6 @@ h2 {
             </div>
         </div>
 
-        <!-- SCREEN 3: GRADE SELECTION -->
         <div id="screen-grades" class="screen">
             <h2 id="grade-screen-title">Select Class</h2>
             <div class="list-container">
@@ -333,13 +387,17 @@ h2 {
             </div>
         </div>
 
-        <!-- SCREEN 4: TOPICS & GAME LINKS -->
         <div id="screen-games" class="screen">
             <h2 id="selected-class-title">Games List</h2>
             <div id="games-list-container" class="list-container">
-                <!-- Dynamic Links Generated Here -->
             </div>
         </div>
+        <div id="screen-player" class="screen">
+    <h2 id="player-title">Game</h2>
+
+    <div id="game-player-container" style="width:100%;">
+    </div>
+</div>
 
     </div>
 
@@ -371,76 +429,739 @@ h2 {
             }
         };
 
-        // --- FULLY POPULATED DATA MAPPED FROM INPUT URLS ---
         const gamesRepository = {
-           "Science": {
-    4: [
-        { chapter:{en:"Chapter 1",ta:"அத்தியாயம் 1"}, topic:{en:"My Body - Internal Organs Quiz",ta:"எனது உடல் - உள் உறுப்புகள் மற்றும் செரிமான மண்டலம்"}, url:{en:"https://wordwall.net/play/114002/027/109", ta:"https://wordwall.net/play/114153/729/463"} },
-        { chapter:{en:"Chapter 2",ta:"அத்தியாயம் 2"}, topic:{en:"Matter and Materials - Fibers",ta:"பருப்பொருள்கள் மற்றும் மூலப்பொருள்கள் - இயற்கை & செயற்கை இழைகள்"}, url:{en:"https://wordwall.net/play/114074/622/639", ta:"https://wordwall.net/play/114154/213/871"} },
-        { chapter:{en:"Chapter 3",ta:"அத்தியாயம் 3"}, topic:{en:"Work and Energy - Science Definition Quiz",ta:"வேலை மற்றும் ஆற்றல் - அறிவியல் ரீதியான வேலை & ஆற்றல் வடிவங்கள்"}, url:{en:"https://wordwall.net/play/114075/531/639", ta:"https://wordwall.net/play/114180/604/338"} }
-    ],
+            "Science": {
+                4: [
+                    {   chapter:{en:"Chapter 1",ta:"அத்தியாயம் 1"},
+                        topic:{en:"My Body - Internal Organs Quiz",ta:"எனது உடல் - உள் உறுப்புகள் மற்றும் செரிமான மண்டலம்"},
+                    url:{
+                        en:"https://wordwall.net/play/114002/027/109",
+                        ta:"https://wordwall.net/play/114153/729/463"
+                    },
 
-    5: [
-        { chapter:{en:"Chapter 1",ta:"அத்தியாயம் 1"}, topic:{en:"Organ Systems - Excretory & Nervous Systems",ta:"உறுப்பு மண்டலங்கள் - சுற்றோட்ட, கழிவுநீக்க & நரம்பு மண்டலம்"}, url:{en:"https://wordwall.net/play/114077/594/747", ta:"https://wordwall.net/play/114180/216/553"} },
-        { chapter:{en:"Chapter 2",ta:"அத்தியாயம் 2"}, topic:{en:"Matter and Materials - States of Water",ta:"பருப்பொருள்கள் மற்றும் மூலப்பொருள்கள் - திண்மம், திரவம் & வாயு நிலைகள்"}, url:{en:"https://wordwall.net/play/114074/622/405", ta:"https://wordwall.net/play/114180/005/882"} },
-        { chapter:{en:"Chapter 3",ta:"அத்தியாயம் 3"}, topic:{en:"Energy - Conservation & Forms",ta:"ஆற்றல் - இயந்திர, வெப்ப, வேதி மற்றும் ஒளி ஆற்றல் வகைகள்"}, url:{en:"https://wordwall.net/play/114094/662/406", ta:"https://wordwall.net/play/114179/783/552"} }
-    ],
-
-    6: [
-        { chapter:{en:"Chapter 1",ta:"அத்தியாயம் 1"}, topic:{en:"Measurements - Standard SI Units",ta:"அளவீடுகள் - பன்னாட்டு அலகு முறை (SI) & நீளம், நிறை கணக்கீடுகள்"}, url:{en:"https://wordwall.net/play/114095/318/720", ta:"https://wordwall.net/play/114179/594/880"} },
-        { chapter:{en:"Chapter 2",ta:"அத்தியாயம் 2"}, topic:{en:"Force and Motion - Matrix & Cycles",ta:"விசையும் இயக்கமும் - நேர்க்கோட்டு, வட்ட மற்றும் கால ஒழுங்கு இயக்கம்"}, url:{en:"https://wordwall.net/play/114123/712/646", ta:"https://wordwall.net/play/114179/120/607"} },
-        { chapter:{en:"Chapter 3",ta:"அத்தியாயம் 3"}, topic:{en:"Matter Around Us - Mixtures",ta:"நம்மைச் சுற்றியுள்ள பருப்பொருள்கள் - கலவைகள் & பிரித்தெடுத்தல் முறைகள்"}, url:{en:"https://wordwall.net/play/114096/116/724", ta:"https://wordwall.net/play/114178/697/941"} }
-    ],
-
-    7: [
-        { chapter:{en:"Chapter 1",ta:"அத்தியாயம் 1"}, topic:{en:"Measurement - Derived Quantities",ta:"அளவீட்டியல் - வழி அலகுகள், ஒழுங்கான மற்றும் ஒழுங்கற்ற வடிவங்கள்"}, url:{en:"https://wordwall.net/play/114124/202/806", ta:"https://wordwall.net/play/114154/646/418"} },
-        { chapter:{en:"Chapter 2",ta:"அத்தியாயம் 2"}, topic:{en:"Force and Motion - Speed & Velocity",ta:"விசையும் இயக்கமும் - தொலைவு, இடப்பெயர்ச்சி, வேகம் & திசைவேகம்"}, url:{en:"https://wordwall.net/play/114124/597/923", ta:"https://wordwall.net/play/114154/939/322"} },
-        { chapter:{en:"Chapter 3",ta:"அத்தியாயம் 3"}, topic:{en:"Matter Around Us - Elements & Compounds",ta:"நம்மைச் சுற்றியுள்ள பருப்பொருள்கள் - அணுக்கள், மூலக்கூறுகள் & சேர்மங்கள்"}, url:{en:"https://wordwall.net/play/114125/590/478", ta:"https://wordwall.net/play/114155/148/788"} }
-    ],
-
-    8: [
-        { chapter:{en:"Chapter 1",ta:"அத்தியாயம் 1"}, topic:{en:"Measurement - Fundamental Units",ta:"அளவீட்டியல் - அடிப்படை அலகுகள், வெப்பநிலை & ஒளிரும் செறிவு"}, url:{en:"https://wordwall.net/play/114127/863/812", ta:"https://wordwall.net/play/114155/526/742"} },
-        { chapter:{en:"Chapter 2",ta:"அத்தியாயம் 2"}, topic:{en:"Forces and Pressure - Liquid Mechanics",ta:"விசையும் அழுத்தமும் - திரவ அழுத்தம், வளிமண்டல அழுத்தம் & உராய்வு"}, url:{en:"https://wordwall.net/play/114128/944/357", ta:"https://wordwall.net/play/114178/016/999"} },
-        { chapter:{en:"Chapter 3",ta:"அத்தியாயம் 3"}, topic:{en:"Light - Mirrors & Focal Length Anatomy",ta:"ஒளி - கோள ஆடிகள், ஒளிவிலகல், விம்பங்கள் மற்றும் கண் அமைப்பு"}, url:{en:"https://wordwall.net/play/114129/247/469", ta:"https://wordwall.net/play/114178/280/574"} }
-    ]
-},
-          "Mathematics": {
-    4: [
-        { chapter:{en:"Chapter 1",ta:"அத்தியாயம் 1"}, topic:{en:"Geometry - Shapes & Diagonals",ta:"வடிவியல் - வடிவங்கள், முனைகள் & மூலைவிட்டங்கள்"}, url:{en:"https://wordwall.net/play/114345/602/346", ta:"https://wordwall.net/play/114345/752/980"} },
-        { chapter:{en:"Chapter 2",ta:"அத்தியாயம் 2"}, topic:{en:"Numbers - Place Value Quiz",ta:"எண்கள் - இடமதிப்பு வினாடி வினா"}, url:{en:"https://wordwall.net/play/114347/499/295", ta:"https://wordwall.net/play/114347/675/493"} },
-        { chapter:{en:"Chapter 3",ta:"அத்தியாயம் 3"}, topic:{en:"Patterns - Complete the Sequence",ta:"அமைப்புகள் - தொடரை நிறைவு செய்க"}, url:{en:"https://wordwall.net/play/114345/935/393", ta:"https://wordwall.net/play/114346/029/450"} }
-    ],
-
-    5: [
-        { chapter:{en:"Chapter 1",ta:"அத்தியாயம் 1"}, topic:{en:"Geometry - 3D Nets & Symmetry Whack-a-Mole",ta:"வடிவியல் - முப்பரிமாண வடிவங்கள் & சமச்சீர் பண்பு"}, url:{en:"https://wordwall.net/play/114344/633/663", ta:"https://wordwall.net/play/114344/707/972"} },
-        { chapter:{en:"Chapter 2",ta:"அத்தியாயம் 2"}, topic:{en:"Numbers - Value Combinations",ta:"எண்கள் - இடமதிப்பு & கணிதச் செயல்பாடுகள்"}, url:{en:"https://wordwall.net/play/114344/855/953", ta:"https://wordwall.net/play/114344/960/281"} },
-        { chapter:{en:"Chapter 3",ta:"அத்தியாயம் 3"}, topic:{en:"Patterns - Square Numbers & Sequences",ta:"அமைப்புகள் - வர்க்க எண்கள் மற்றும் எண்களின் வரிசை"}, url:{en:"https://wordwall.net/play/114345/143/582", ta:"https://wordwall.net/play/114345/387/318"} }
-    ],
-
-    6: [
-        { chapter:{en:"Chapter 1",ta:"அத்தியாயம் 1"}, topic:{en:"Numbers - BIDMAS, HCF & Primes",ta:"எண்கள் - செயல்பாடுகளின் வரிசை, மீ.பெ.கா & பகா எண்கள்"}, url:{en:"https://wordwall.net/play/114311/947/296", ta:"https://wordwall.net/play/114312/073/764"} },
-        { chapter:{en:"Chapter 2",ta:"அத்தியாயம் 2"}, topic:{en:"Introduction to Algebra - Finding Variables",ta:"இயற்கணிதம் ஓர் அறிமுகம் - மாறிகள் மற்றும் வாய்மொழிக் கூற்றுகள்"}, url:{en:"https://wordwall.net/play/114312/343/101", ta:"https://wordwall.net/play/114312/589/575"} },
-        { chapter:{en:"Chapter 3",ta:"அத்தியாயம் 3"}, topic:{en:"Ratio and Proportion - Simplify & Balance",ta:"விகிதம் மற்றும் விகிதச்சமநிலை - எளிய வடிவம் & சமான விகிதம்"}, url:{en:"https://wordwall.net/play/114312/835/904", ta:"https://wordwall.net/play/114313/041/956"} }
-    ],
-
-    7: [
-        { chapter:{en:"Chapter 1",ta:"அத்தியாயம் 1"}, topic:{en:"Number System - Integers Calculation Matrix",ta:"எண்ணியல் - முழுக்களின் கூட்டல், கழித்தல் & பெருக்கல் விதிகள்"}, url:{en:"https://wordwall.net/play/114310/059/145", ta:"https://wordwall.net/play/114310/436/955"} },
-        { chapter:{en:"Chapter 2",ta:"அத்தியாயம் 2"}, topic:{en:"Measurements - Geometry Planes",ta:"அளவைகள் - இணைகரம், சாய்சதுரம் & சரிவகத்தின் பரப்பளவு"}, url:{en:"https://wordwall.net/play/114310/790/150", ta:"https://wordwall.net/play/114311/024/405"} },
-        { chapter:{en:"Chapter 3",ta:"அத்தியாயம் 3"}, topic:{en:"Algebra - Terms & Equations Solver",ta:"இயற்கணிதம் - ஒத்த உறுப்புகள், எண்கெழுக்கள் & மாறிலிகள்"}, url:{en:"https://wordwall.net/play/114311/294/235", ta:"https://wordwall.net/play/114311/573/560"} }
-    ],
-
-    8: [
-        { chapter:{en:"Chapter 1",ta:"அத்தியாயம் 1"}, topic:{en:"Rational Numbers - Identities & Inverses",ta:"விகிதமுறு எண்கள் - கூட்டல்/பெருக்கல் சமனி & நேர்மாறு பண்புகள்"}, url:{en:"https://wordwall.net/play/114307/487/168", ta:"https://wordwall.net/play/114308/100/597"} },
-        { chapter:{en:"Chapter 2",ta:"அத்தியாயம் 2"}, topic:{en:"Measurements - Sector Area & Arc Matchup",ta:"அளவைகள் - வட்டவில்லின் நீளம் & வட்டக்கோணப் பகுதி பரப்பளவு"}, url:{en:"https://wordwall.net/play/114303/893/779", ta:"https://wordwall.net/play/114305/487/887"} },
-        { chapter:{en:"Chapter 3",ta:"அத்தியாயம் 3"}, topic:{en:"Algebra - Polynomial Degrees & Equations",ta:"இயற்கணிதம் - கோவைகளின் படி & இயற்கணித முற்றொருமைகள்"}, url:{en:"https://wordwall.net/play/114306/245/200", ta:"https://wordwall.net/play/114306/706/692"} }
-    ]
-}
-}
+                     embed_en: `
+                        <iframe
+                            style="max-width:100%; border:none;"
+                            src="https://wordwall.net/embed/5f448e1b71784f609dd859031e4372d5?themeId=1&templateId=3&fontStackId=1"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                        `,
+                      embed_ta: `
+                        <iframe
+                             style="max-width:100%" 
+                             src="https://wordwall.net/embed/eba6a0eebbfa48219577c197b4d97e2b?themeId=1&templateId=3&fontStackId=0"
+                              width="500"
+                              height="380" 
+                              frameborder="0" 
+                              allowfullscreen>
+                              </iframe>
+                              `
+                    },                    
+                    {   chapter:{en:"Chapter 2",ta:"அத்தியாயம் 2"},
+                        topic:{en:"Matter and Materials - Fibers",ta:"பருப்பொருள்கள் மற்றும் மூலப்பொருள்கள் - இயற்கை & செயற்கை இழைகள்"}, 
+                        url:{
+                            en:"https://wordwall.net/play/114074/622/639",
+                            ta:"https://wordwall.net/play/114154/213/871"
+                        },
+                        embed_en:`
+                        <iframe 
+                            style="max-width:100%" 
+                            src="https://wordwall.net/embed/879870e2a3ae456a8809e9fadab20404?themeId=65&templateId=2&fontStackId=0" 
+                            width="500"
+                            height="380"
+                            frameborder="0" 
+                            allowfullscreen>
+                            </iframe>
+                            `,
+                        embed_ta:`
+                            <iframe
+                              style="max-width:100%"
+                              src="https://wordwall.net/embed/3b2448b58e6a448db174f9906c7ab5a9?themeId=65&templateId=2&fontStackId=0" 
+                              width="500"
+                              height="380"
+                              frameborder="0" 
+                              allowfullscreen>
+                            </iframe>
+                        `
+                     },
+                    { chapter:{en:"Chapter 3",ta:"அத்தியாயம் 3"}, 
+                    topic:{en:"Work and Energy - Science Definition Quiz",ta:"வேலை மற்றும் ஆற்றல் - அறிவியல் ரீதியான வேலை & ஆற்றல் வடிவங்கள்"},
+                    url:{en:"https://wordwall.net/play/114075/531/639", ta:"https://wordwall.net/play/114180/604/338"},
+                     embed_en: `
+                     <iframe 
+                     style="max-width:100%" 
+                     src="https://wordwall.net/embed/918a979a5fe1423e9f9d12fb3bad72d5?themeId=22&templateId=69&fontStackId=0" 
+                     width="500" 
+                     height="380" 
+                     frameborder="0" 
+                     allowfullscreen>
+                        </iframe>
+                     `,
+                     embed_ta:`
+                        <iframe
+                         style="max-width:100%" 
+                         src="https://wordwall.net/embed/76c85675203741fda5128edf6125cf1d?themeId=22&templateId=69&fontStackId=0" 
+                         width="500" 
+                         height="380" 
+                         frameborder="0" 
+                         allowfullscreen>
+                            </iframe>
+                     `
+                     }
+                ],
+                5: [
+                    { chapter:{en:"Chapter 1",ta:"அத்தியாயம் 1"}, 
+                    topic:{en:"Organ Systems - Excretory & Nervous Systems",ta:"உறுப்பு மண்டலங்கள் - சுற்றோட்ட, கழிவுநீக்க & நரம்பு மண்டலம்"}, 
+                    url:{en:"https://wordwall.net/play/114077/594/747", ta:"https://wordwall.net/play/114180/216/553"},
+                    embed_en: `
+                        <iframe
+                         style="max-width:100%" 
+                         src="https://wordwall.net/embed/b90bd2cf67334f03954594888430a94c?themeId=66&templateId=38&fontStackId=0" 
+                         width="500" 
+                         height="380" 
+                         frameborder="0" 
+                         allowfullscreen>
+                        </iframe>
+                    `,
+                    embed_ta:`
+                        <iframe 
+                            style="max-width:100%" 
+                            src="https://wordwall.net/embed/08c9a8f0d535449c88e6e46852c6a37d?themeId=66&templateId=38&fontStackId=0" 
+                            width="500" 
+                            height="380" 
+                            frameborder="0" 
+                            allowfullscreen>
+                            </iframe>
+                    `},
+                    { chapter:{en:"Chapter 2",ta:"அத்தியாயம் 2"}, 
+                    topic:{en:"Matter and Materials - States of Water",ta:"பருப்பொருள்கள் மற்றும் மூலப்பொருள்கள் - திண்மம், திரவம் & வாயு நிலைகள்"}, 
+                    url:{en:"https://wordwall.net/play/114074/622/405", ta:"https://wordwall.net/play/114180/005/882"}, 
+                   embed_en:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/643f0414d58c406d8d9a9cbf35aec59e?themeId=44&templateId=35&fontStackId=0"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    `,
+                    embed_ta:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/75c4eea538794db1b358a0f47aae7de5?themeId=44&templateId=35&fontStackId=0"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                        `
+                    },
+                    { chapter:{en:"Chapter 3",ta:"அத்தியாயம் 3"}, 
+                    topic:{en:"Energy - Conservation & Forms",ta:"ஆற்றல் - இயந்திர, வெப்ப, வேதி மற்றும் ஒளி ஆற்றல் வகைகள்"}, 
+                    url:{en:"https://wordwall.net/play/114094/662/406", ta:"https://wordwall.net/play/114179/783/552"},
+                embed_en:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/c02504e20e5b427392501ad4c371b158?themeId=1&templateId=3&fontStackId=0"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    `,
+                    embed_ta:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/790bbee4f4a647249a812c930b89e3a3?themeId=1&templateId=3&fontStackId=0"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    ` }
+                ],
+                6: [
+                    { chapter:{en:"Chapter 1",ta:"அத்தியாயம் 1"}, 
+                    topic:{en:"Measurements - Standard SI Units",ta:"அளவீடுகள் - பன்னாட்டு அலகு முறை (SI) & நீளம், நிறை கணக்கீடுகள்"}, 
+                    url:{en:"https://wordwall.net/play/114095/318/720", ta:"https://wordwall.net/play/114179/594/880"},
+                    embed_en:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/c23ead1afdb94d63aeaded205ffcd34e?themeId=66&templateId=48&fontStackId=0"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    `,
+                    embed_ta:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/95492ae3109449d7aec9a98098a1207e?themeId=66&templateId=48&fontStackId=0"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    ` },
+                    { chapter:{en:"Chapter 2",ta:"அத்தியாயம் 2"}, 
+                    topic:{en:"Force and Motion - Matrix & Cycles",ta:"விசையும் இயக்கமும் - நேர்க்கோட்டு, வட்ட மற்றும் கால ஒழுங்கு இயக்கம்"}, 
+                    url:{en:"https://wordwall.net/play/114123/712/646", ta:"https://wordwall.net/play/114179/120/607"},
+                    embed_en:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/7525494c7f874067b6df1a67a1f5a115?themeId=23&templateId=69&fontStackId=0"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    `,
+                    embed_ta:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/fe791d16315545abbed85ef9aacd4070?themeId=23&templateId=69&fontStackId=0"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    `},
+                    { chapter:{en:"Chapter 3",ta:"அத்தியாயம் 3"}, 
+                    topic:{en:"Matter Around Us - Mixtures",ta:"நம்மைச் சுற்றியுள்ள பருப்பொருள்கள் - கலவைகள் & பிரித்தெடுத்தல் முறைகள்"}, 
+                    url:{en:"https://wordwall.net/play/114096/116/724", ta:"https://wordwall.net/play/114178/697/941"},
+                embed_en:`
+                   <iframe 
+                   style="max-width:100%" 
+                   src="https://wordwall.net/embed/fda7127ffee448aeb6a682c106f053b0?themeId=22&templateId=69&fontStackId=0" 
+                   width="500" 
+                   height="380" 
+                   frameborder="0" 
+                   allowfullscreen>
+                   </iframe>
+                `,
+                embed_ta:`
+                    <iframe
+                        style="max-width:100%"
+                        src="https://wordwall.net/embed/e3151ba91bf44a808092e41c7c9c7b21?themeId=22&templateId=69&fontStackId=0"
+                        width="500"
+                        height="380"
+                        frameborder="0"
+                        allowfullscreen>
+                    </iframe>
+                ` }
+                ],
+                7: [
+                    { chapter:{en:"Chapter 1",ta:"அத்தியாயம் 1"}, 
+                    topic:{en:"Measurement - Derived Quantities",ta:"அளவீட்டியல் - வழி அலகுகள், ஒழுங்கான மற்றும் ஒழுங்கற்ற வடிவங்கள்"}, 
+                    url:{en:"https://wordwall.net/play/114124/202/806", ta:"https://wordwall.net/play/114154/646/418"},
+                    embed_en:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/491c1789f9ee4313bce67d15153b3326?themeId=22&templateId=69&fontStackId=0"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    `,
+                    embed_ta:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/bc0982eb7bb14f79b71f07c32078a983?themeId=22&templateId=69&fontStackId=0"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    ` },
+                    { chapter:{en:"Chapter 2",ta:"அத்தியாயம் 2"}, 
+                    topic:{en:"Force and Motion - Speed & Velocity",ta:"விசையும் இயக்கமும் - தொலைவு, இடப்பெயர்ச்சி, வேகம் & திசைவேகம்"}, 
+                    url:{en:"https://wordwall.net/play/114124/597/923", ta:"https://wordwall.net/play/114154/939/322"},
+                    embed_en:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/879183774a224d54814714e723d8a28a?themeId=42&templateId=11&fontStackId=0"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    `,
+                    embed_ta:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/52b78d01c4cb43a28214f873d92ab262?themeId=42&templateId=11&fontStackId=0"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    ` },
+                    { chapter:{en:"Chapter 3",ta:"அத்தியாயம் 3"}, 
+                    topic:{en:"Matter Around Us - Elements & Compounds",ta:"நம்மைச் சுற்றியுள்ள பருப்பொருள்கள் - அணுக்கள், மூலக்கூறுகள் & சேர்மங்கள்"}, 
+                    url:{en:"https://wordwall.net/play/114125/590/478", ta:"https://wordwall.net/play/114155/148/788"},
+                    embed_en:`
+                            <iframe
+                                style="max-width:100%"
+                                src="https://wordwall.net/embed/76f5963b89924525b932237f401b2c91?themeId=43&templateId=2&fontStackId=0"
+                                width="500"
+                                height="380"
+                                frameborder="0"
+                                allowfullscreen>
+                            </iframe>
+                        `,
+                        embed_ta:`
+                            <iframe
+                                style="max-width:100%"
+                                src="https://wordwall.net/embed/bec80376acbf4f53af5f02de73bfd99d?themeId=43&templateId=2&fontStackId=0"
+                                width="500"
+                                height="380"
+                                frameborder="0"
+                                allowfullscreen>
+                            </iframe>
+                        ` }
+                ],
+                8: [
+                    { chapter:{en:"Chapter 1",ta:"அத்தியாயம் 1"}, 
+                    topic:{en:"Measurement - Fundamental Units",ta:"அளவீட்டியல் - அடிப்படை அலகுகள், வெப்பநிலை & ஒளிரும் செறிவு"}, 
+                    url:{en:"https://wordwall.net/play/114127/863/812", ta:"https://wordwall.net/play/114155/526/742"},
+                embed_en:`
+                    <iframe
+                        style="max-width:100%"
+                        src="https://wordwall.net/embed/952523337541498ca658d98d88c32a82?themeId=23&templateId=49&fontStackId=0"
+                        width="500"
+                        height="380"
+                        frameborder="0"
+                        allowfullscreen>
+                    </iframe>
+                `,
+                embed_ta:`
+                    <iframe
+                        style="max-width:100%"
+                        src="https://wordwall.net/embed/143003183b9e4bb191428d7bdc94487e?themeId=23&templateId=49&fontStackId=0"
+                        width="500"
+                        height="380"
+                        frameborder="0"
+                        allowfullscreen>
+                    </iframe>
+                ` },
+                    { chapter:{en:"Chapter 2",ta:"அத்தியாயம் 2"}, 
+                    topic:{en:"Forces and Pressure - Liquid Mechanics",ta:"விசையும் அழுத்தமும் - திரவ அழுத்தம், வளிமண்டல அழுத்தம் & உராய்வு"}, 
+                    url:{en:"https://wordwall.net/play/114128/944/357", ta:"https://wordwall.net/play/114178/016/999"},
+                embed_en:`
+                    <iframe
+                        style="max-width:100%"
+                        src="https://wordwall.net/embed/ce8a5fed5f8344b0b59b628f838e4daf?themeId=50&templateId=2&fontStackId=0"
+                        width="500"
+                        height="380"
+                        frameborder="0"
+                        allowfullscreen>
+                    </iframe>
+                `,
+                embed_ta:`
+                    <iframe
+                        style="max-width:100%"
+                        src="https://wordwall.net/embed/e5ebe39ce85d414ea99467483263444b?themeId=50&templateId=2&fontStackId=0"
+                        width="500"
+                        height="380"
+                        frameborder="0"
+                        allowfullscreen>
+                    </iframe>
+                ` },
+                    { chapter:{en:"Chapter 3",ta:"அத்தியாயம் 3"}, 
+                    topic:{en:"Light - Mirrors & Focal Length Anatomy",ta:"ஒளி - கோள ஆடிகள், ஒளிவிலகல், விம்பங்கள் மற்றும் கண் அமைப்பு"}, 
+                    url:{en:"https://wordwall.net/play/114129/247/469", ta:"https://wordwall.net/play/114178/280/574"},
+                embed_en:`
+                    <iframe
+                        style="max-width:100%"
+                        src="https://wordwall.net/embed/c2d459689ebb44c3a212c9c4cd4d6da0?themeId=65&templateId=46&fontStackId=0"
+                        width="500"
+                        height="380"
+                        frameborder="0"
+                        allowfullscreen>
+                    </iframe>
+                `,
+                embed_ta:`
+                    <iframe
+                        style="max-width:100%"
+                        src="https://wordwall.net/embed/96c4fc7a9fad469ab867cd942b0dc648?themeId=1&templateId=46&fontStackId=0"
+                        width="500"
+                        height="380"
+                        frameborder="0"
+                        allowfullscreen>
+                    </iframe>
+                ` }
+                ]
+            },
+            "Mathematics": {
+                4: [
+                    { chapter:{en:"Chapter 1",ta:"அத்தியாயம் 1"}, 
+                    topic:{en:"Geometry - Shapes & Diagonals",ta:"வடிவியல் - வடிவங்கள், முனைகள் & மூலைவிட்டங்கள்"}, 
+                    url:{en:"https://wordwall.net/play/114345/602/346", ta:"https://wordwall.net/play/114345/752/980"},
+                    embed_en:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/0dca0e3236b4446bbcba5856dc94780f?themeId=46&templateId=48&fontStackId=0"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    `,
+                    embed_ta:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/b143d5e39d1b44c78627ee51b404ae91?themeId=46&templateId=48&fontStackId=0"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    ` },
+                    { chapter:{en:"Chapter 2",ta:"அத்தியாயம் 2"}, 
+                    topic:{en:"Numbers - Place Value Quiz",ta:"எண்கள் - இடமதிப்பு வினாடி வினா"}, 
+                    url:{en:"https://wordwall.net/play/114347/499/295", ta:"https://wordwall.net/play/114347/675/493"},
+                    embed_en:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/39ae1a7c21f34b5ca26cb0ac9ee60cbf?themeId=65&templateId=5&fontStackId=0"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    `,
+                    embed_ta:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/4d6159cad12949dfb703256c82cb86a5?themeId=65&templateId=5&fontStackId=0"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    ` },
+                    { chapter:{en:"Chapter 3",ta:"அத்தியாயம் 3"}, 
+                    topic:{en:"Patterns - Complete the Sequence",ta:"அமைப்புகள் - தொடரை நிறைவு செய்க"}, 
+                    url:{en:"https://wordwall.net/play/114345/935/393", ta:"https://wordwall.net/play/114346/029/450"},
+                embed_en:`
+                    <iframe
+                        style="max-width:100%"
+                        src="https://wordwall.net/embed/6cf4bd15bd6346269999223601ebd7e7?themeId=2&templateId=36&fontStackId=0"
+                        width="500"
+                        height="380"
+                        frameborder="0"
+                        allowfullscreen>
+                    </iframe>
+                `,
+                embed_ta:`
+                    <iframe
+                        style="max-width:100%"
+                        src="https://wordwall.net/embed/9b11024eb5e34fe1aaedc5fc1534d57a?themeId=2&templateId=36&fontStackId=0"
+                        width="500"
+                        height="380"
+                        frameborder="0"
+                        allowfullscreen>
+                    </iframe>
+                ` }
+                ],
+                5: [
+                    { chapter:{en:"Chapter 1",ta:"அத்தியாயம் 1"}, 
+                    topic:{en:"Geometry - 3D Nets & Symmetry Whack-a-Mole",ta:"வடிவியல் - முப்பரிமாண வடிவங்கள் & சமச்சீர் பண்பு"}, 
+                    url:{en:"https://wordwall.net/play/114344/633/663", ta:"https://wordwall.net/play/114344/707/972"},
+                    embed_en:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/eea192cac8864cc086ed36036dadfb17?themeId=22&templateId=71&fontStackId=0"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    `,
+                    embed_ta:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/fd822b8e827d4e7d999166cdd6f102ac?themeId=22&templateId=71&fontStackId=0"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    ` },
+                    { chapter:{en:"Chapter 2",ta:"அத்தியாயம் 2"}, 
+                    topic:{en:"Numbers - Value Combinations",ta:"எண்கள் - இடமதிப்பு & கணிதச் செயல்பாடுகள்"}, 
+                    url:{en:"https://wordwall.net/play/114344/855/953", ta:"https://wordwall.net/play/114344/960/281"},
+                    embed_en:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/a9ff973c4c83438c8bca5744a7329720?themeId=49&templateId=69&fontStackId=0"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    `,
+                    embed_ta:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/ff01cfd29eec4e07a74efdc877831c5d?themeId=49&templateId=69&fontStackId=0"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    ` },
+                    { chapter:{en:"Chapter 3",ta:"அத்தியாயம் 3"}, 
+                    topic:{en:"Patterns - Square Numbers & Sequences",ta:"அமைப்புகள் - வர்க்க எண்கள் மற்றும் எண்களின் வரிசை"}, 
+                    url:{en:"https://wordwall.net/play/114345/143/582", ta:"https://wordwall.net/play/114345/387/318"},
+                    embed_en:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/4bed86157f164d0c87d32ef048663edd?themeId=45&templateId=36&fontStackId=1"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    `,
+                    embed_ta:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/fc7929b9153540b58e1359ad9f0cd7b2?themeId=45&templateId=36&fontStackId=0"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    ` }
+                ],
+                6: [
+                    { chapter:{en:"Chapter 1",ta:"அத்தியாயம் 1"}, 
+                    topic:{en:"Numbers - BIDMAS, HCF & Primes",ta:"எண்கள் - செயல்பாடுகளின் வரிசை, மீ.பெ.கா & பகா எண்கள்"}, 
+                    url:{en:"https://wordwall.net/play/114311/947/296", ta:"https://wordwall.net/play/114312/073/764"},
+                embed_en:`
+                    <iframe
+                        style="max-width:100%"
+                        src="https://wordwall.net/embed/a058431fada942ea95ca67cc897ba8b0?themeId=44&templateId=35&fontStackId=0"
+                        width="500"
+                        height="380"
+                        frameborder="0"
+                        allowfullscreen>
+                    </iframe>
+                `,
+                embed_ta:`
+                    <iframe
+                        style="max-width:100%"
+                        src="https://wordwall.net/embed/42313bd0c2064d39b9e83e0d54eeb910?themeId=44&templateId=35&fontStackId=0"
+                        width="500"
+                        height="380"
+                        frameborder="0"
+                        allowfullscreen>
+                    </iframe>
+                ` },
+                    { chapter:{en:"Chapter 2",ta:"அத்தியாயம் 2"}, 
+                    topic:{en:"Introduction to Algebra - Finding Variables",ta:"இயற்கணிதம் ஓர் அறிமுகம் - மாறிகள் மற்றும் வாய்மொழிக் கூற்றுகள்"}, 
+                    url:{en:"https://wordwall.net/play/114312/343/101", ta:"https://wordwall.net/play/114312/589/575"},
+                    embed_en:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/cedc0180b1c6463bbce9b8a1ad366e40?themeId=1&templateId=89&fontStackId=0"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    `,
+                    embed_ta:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/00a45a3fa4534c8993f2fef66e881f37?themeId=41&templateId=89&fontStackId=0"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    ` },
+                    { chapter:{en:"Chapter 3",ta:"அத்தியாயம் 3"}, 
+                    topic:{en:"Ratio and Proportion - Simplify & Balance",ta:"விகிதம் மற்றும் விகிதச்சமநிலை - எளிய வடிவம் & சமான விகிதம்"}, 
+                    url:{en:"https://wordwall.net/play/114312/835/904", ta:"https://wordwall.net/play/114313/041/956"},
+                embed_en:`
+                    <iframe
+                        style="max-width:100%"
+                        src="https://wordwall.net/embed/7839e95a7e9e4d2483520652b1a91d35?themeId=22&templateId=71&fontStackId=0"
+                        width="500"
+                        height="380"
+                        frameborder="0"
+                        allowfullscreen>
+                    </iframe>
+                `,
+                embed_ta:`
+                    <iframe
+                        style="max-width:100%"
+                        src="https://wordwall.net/embed/576f1a89c3ab4675bf13119750cb7457?themeId=22&templateId=71&fontStackId=0"
+                        width="500"
+                        height="380"
+                        frameborder="0"
+                        allowfullscreen>
+                    </iframe>
+                ` }
+                ],
+                7: [
+                    { chapter:{en:"Chapter 1",ta:"அத்தியாயம் 1"}, 
+                    topic:{en:"Number System - Integers Calculation Matrix",ta:"எண்ணியல் - முழுக்களின் கூட்டல், கழித்தல் & பெருக்கல் விதிகள்"}, 
+                    url:{en:"https://wordwall.net/play/114310/059/145", ta:"https://wordwall.net/play/114310/436/955"},
+                    embed_en:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/5bf4a9a15de04aa1acdafa7f20e425f6?themeId=45&templateId=3&fontStackId=0"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    `,
+                    embed_ta:`
+                        <iframe
+                            style="max-width:100%"
+                            src="https://wordwall.net/embed/1421c358ef0545b19eeb1a17c6f12af9?themeId=1&templateId=3&fontStackId=0"
+                            width="500"
+                            height="380"
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    ` },
+                    { chapter:{en:"Chapter 2",ta:"அத்தியாயம் 2"}, 
+                    topic:{en:"Measurements - Geometry Planes",ta:"அளவைகள் - இணைகரம், சாய்சதுரம் & சரிவகத்தின் பரப்பளவு"}, 
+                    url:{en:"https://wordwall.net/play/114310/790/150", ta:"https://wordwall.net/play/114311/024/405"},
+                embed_en:`
+                    <iframe
+                        style="max-width:100%"
+                        src="https://wordwall.net/embed/4a2515efec844aec9a0215a81328f889?themeId=66&templateId=3&fontStackId=0"
+                        width="500"
+                        height="380"
+                        frameborder="0"
+                        allowfullscreen>
+                    </iframe>
+                `,
+                embed_ta:`
+                    <iframe
+                        style="max-width:100%"
+                        src="https://wordwall.net/embed/26098df761f14539a6cd03aeb25e97c0?themeId=66&templateId=3&fontStackId=0"
+                        width="500"
+                        height="380"
+                        frameborder="0"
+                        allowfullscreen>
+                    </iframe>
+                ` },
+                    { chapter:{en:"Chapter 3",ta:"அத்தியாயம் 3"}, 
+                    topic:{en:"Algebra - Terms & Equations Solver",ta:"இயற்கணிதம் - ஒத்த உறுப்புகள், எண்கெழுக்கள் & மாறிலிகள்"}, 
+                    url:{en:"https://wordwall.net/play/114311/294/235", ta:"https://wordwall.net/play/114311/573/560"},
+                embed_en:`
+                    <iframe
+                        style="max-width:100%"
+                        src="https://wordwall.net/embed/73fbfbf4e60b4a289afaa01f0125f028?themeId=41&templateId=89&fontStackId=0"
+                        width="500"
+                        height="380"
+                        frameborder="0"
+                        allowfullscreen>
+                    </iframe>
+                `,
+                embed_ta:`
+                    <iframe
+                        style="max-width:100%"
+                        src="https://wordwall.net/embed/13028972710d455a87589e3d292732c0?themeId=41&templateId=89&fontStackId=0"
+                        width="500"
+                        height="380"
+                        frameborder="0"
+                        allowfullscreen>
+                    </iframe>
+                ` }
+                ],
+                8: [
+                    { chapter:{en:"Chapter 1",ta:"அத்தியாயம் 1"}, 
+                    topic:{en:"Rational Numbers - Identities & Inverses",ta:"விகிதமுறு எண்கள் - கூட்டல்/பெருக்கல் சமனி & நேர்மாறு பண்புகள்"}, 
+                    url:{en:"https://wordwall.net/play/114307/487/168", ta:"https://wordwall.net/play/114308/100/597"},
+                embed_en:`
+                    <iframe
+                        style="max-width:100%"
+                        src="https://wordwall.net/embed/aa9b6d35570f406fbf8447a63d69cf5e?themeId=21&templateId=69&fontStackId=0"
+                        width="500"
+                        height="380"
+                        frameborder="0"
+                        allowfullscreen>
+                    </iframe>
+                `,
+                embed_ta:`
+                    <iframe
+                        style="max-width:100%"
+                        src="https://wordwall.net/embed/f31d5eccd7dd417c9bbb4fdf0ecee36e?themeId=21&templateId=69&fontStackId=0"
+                        width="500"
+                        height="380"
+                        frameborder="0"
+                        allowfullscreen>
+                    </iframe>
+                ` },
+                    { chapter:{en:"Chapter 2",ta:"அத்தியாயம் 2"}, 
+                    topic:{en:"Measurements - Sector Area & Arc Matchup",ta:"அளவைகள் - வட்டவில்லின் நீளம் & வட்டக்கோணப் பகுதி பரப்பளவு"}, 
+                    url:{en:"https://wordwall.net/play/114303/893/779", ta:"https://wordwall.net/play/114305/487/887"},
+                embed_en:`
+                    <iframe
+                        style="max-width:100%"
+                        src="https://wordwall.net/embed/547a73b021d94b0ba5caccf5bd893134?themeId=45&templateId=3&fontStackId=0"
+                        width="500"
+                        height="380"
+                        frameborder="0"
+                        allowfullscreen>
+                    </iframe>
+                `,
+                embed_ta:`
+                    <iframe
+                        style="max-width:100%"
+                        src="https://wordwall.net/embed/1e577603aed74f2c84da2cc2a2d60a63?themeId=1&templateId=3&fontStackId=0"
+                        width="500"
+                        height="380"
+                        frameborder="0"
+                        allowfullscreen>
+                    </iframe>
+                ` },
+                    { chapter:{en:"Chapter 3",ta:"அத்தியாயம் 3"}, 
+                    topic:{en:"Algebra - Polynomial Degrees & Equations",ta:"இயற்கணிதம் - கோவைகளின் படி & இயற்கணித முற்றொருமைகள்"}, 
+                    url:{en:"https://wordwall.net/play/114306/245/200", ta:"https://wordwall.net/play/114306/706/692"},
+                embed_en:`
+                    <iframe
+                        style="max-width:100%"
+                        src="https://wordwall.net/embed/5bc2e6f2c1df4952bc592ddea9f45e46?themeId=21&templateId=69&fontStackId=0"
+                        width="500"
+                        height="380"
+                        frameborder="0"
+                        allowfullscreen>
+                    </iframe>
+                `,
+                embed_ta:`
+                    <iframe
+                        style="max-width:100%"
+                        src="https://wordwall.net/embed/63fe5d3653cc42d0b354c35c9d11aa9f?themeId=21&templateId=69&fontStackId=0"
+                        width="500"
+                        height="380"
+                        frameborder="0"
+                        allowfullscreen>
+                    </iframe>
+                ` }
+                ]
+            }
+        };
 
         let currentScreen = 'home';
         let currentLang = 'en';
         let selectedSubject = null;
         let selectedClass = null;
+        let currentGame = null;
 
         function setLanguage(langCode) {
             currentLang = langCode;
@@ -481,7 +1202,21 @@ h2 {
             document.getElementById(`screen-${screenName}`).classList.add('active');
             
             const navBar = document.getElementById('navigation-bar');
+            const wrapper = document.getElementById('app-container-wrapper');
+            const bodyEl = document.body;
+
             navBar.style.display = (screenName === 'home') ? 'none' : 'flex';
+            
+            if (screenName === 'home') {
+                wrapper.classList.add('home-active');
+                bodyEl.className = "theme-home";
+                wrapper.style.pointerEvents = "none"; 
+            } else {
+                wrapper.classList.remove('home-active');
+                bodyEl.className = "theme-inner";
+                wrapper.style.pointerEvents = "auto";
+            }
+
             currentScreen = screenName;
         }
 
@@ -493,6 +1228,17 @@ h2 {
             document.getElementById('grade-screen-title').innerText = `${subjectLabel} - ${dict.selectClass}`;
             selectedClass = null; 
             navigateTo('grades');
+        }
+        function openGame(game) {
+            currentGame = game;
+            document.getElementById('player-title').innerText =
+            `${game.chapter[currentLang]} - ${game.topic[currentLang]}`;
+
+            document.getElementById('game-player-container').innerHTML =
+            currentLang === 'ta'
+                ? game.embed_ta
+                : game.embed_en;
+            navigateTo('player');
         }
 
         function loadGames(classId) {
@@ -509,35 +1255,60 @@ h2 {
 
             if(games.length > 0) {
                 games.forEach(game => {
-                    const linkElement = document.createElement('a');
-                    linkElement.href = game.url[currentLang]; // Pulls target URL matching active local state
-                    linkElement.target = "_blank";
-                    linkElement.className = "item-link game-link";
-                    
-                    const displayChapter = game.chapter[currentLang];
-                    const displayTopic = game.topic[currentLang];
-                    
-                    linkElement.innerHTML = `
-                        <div class="chapter-title">${displayChapter}</div>
-                        <div>${displayTopic}</div>
+                   if (
+                        (currentLang === 'ta' && game.embed_ta) ||
+                        (currentLang === 'en' && game.embed_en)
+                    )
+                    {
+                    const gameCard = document.createElement('a');
+
+                    gameCard.href = "#";
+                    gameCard.className = "item-link game-link";
+
+                    gameCard.innerHTML = `
+                    <div class="chapter-title">${game.chapter[currentLang]}</div>
+                    <div>${game.topic[currentLang]}</div>
+
+                    <div style="
+                    margin-top:10px;
+                    color:#21A0D2;
+                    font-size:0.9rem;
+                    font-weight:bold;">
+                    ▶ Play Game
+                    </div>
                     `;
-                    container.appendChild(linkElement);
+
+                    gameCard.onclick = function(e) {
+                    e.preventDefault();
+                    openGame(game);
+                    };
+
+                    container.appendChild(gameCard);
+                    }
                 });
-            } else {
-                container.innerHTML = `<p style="color: #666; padding: 20px;">${dict.comingSoon}</p>`;
-            }
+                    } else {
+                    container.innerHTML = `<p style="color: #666; padding: 20px;">${dict.comingSoon}</p>`;
+                    }
 
             navigateTo('games');
         }
 
         function goBack() {
-            if (currentScreen === 'games') {
-                selectedClass = null; 
+            if (currentScreen === 'player') {
+                navigateTo('games');
+            }
+
+            else if (currentScreen === 'games') {
+                selectedClass = null;
                 navigateTo('grades');
-            } else if (currentScreen === 'grades') {
+            }
+
+            else if (currentScreen === 'grades') {
                 selectedSubject = null;
                 navigateTo('subjects');
-            } else if (currentScreen === 'subjects') {
+            }
+
+            else if (currentScreen === 'subjects') {
                 navigateTo('home');
             }
         }
